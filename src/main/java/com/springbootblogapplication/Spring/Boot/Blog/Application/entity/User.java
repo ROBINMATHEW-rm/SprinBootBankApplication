@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.autoconfigure.amqp.RabbitConnectionDetails;
 
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -18,8 +18,10 @@ public class User {
     private long id;
     private String name;
     private String email;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Address address;
+    @OneToMany(mappedBy = "user",cascade =CascadeType.ALL)
+    private List<Account> accounts;
     @ManyToMany
     private Set<Role> roleSet;
 }

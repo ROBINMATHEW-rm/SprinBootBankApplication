@@ -19,6 +19,6 @@ public class Account {
     private double balance;
     @ManyToOne
     private User user;
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account",cascade = CascadeType.ALL)
     private List<Transaction> transactionList;
 }
