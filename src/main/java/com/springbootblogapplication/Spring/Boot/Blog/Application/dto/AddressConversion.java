@@ -1,6 +1,4 @@
 package com.springbootblogapplication.Spring.Boot.Blog.Application.dto;
-
-import com.springbootblogapplication.Spring.Boot.Blog.Application.dto.AddressDto;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.entity.Address;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +13,7 @@ public Address dtoToEntity(AddressDto addressDto){
 }
     public AddressDto entityToDto(Address address){
         AddressDto addressDto = new AddressDto();
+        addressDto.setAddressId(address.getId());
         addressDto.setStreet(address.getStreet());
         addressDto.setState(address.getState());
         addressDto.setZipCode(address.getZipCode());
