@@ -23,6 +23,15 @@ public class AddressServiceImpl implements AddressService {
     return addressConversion.entityToDto(result);
     }
     @Override
+    public AddressDto addressUpdate(long id, AddressDto addressDto){
+        Address result = addressRepo.findById(id).orElseThrow(() -> new RuntimeException());
+        result.setStreet(addressDto.getStreet());
+        result.setState(addressDto.getState());
+        result.setZipCode(addressDto.getZipCode());
+        Address updatedResult=addressRepo.save(result);
+        return addressConversion.entityToDto(updatedResult);
+    }
+    @Override
     public List<AddressDto> addressGetAll(){
         List<Address> result = addressRepo.findAll();
         return addressConversion.toDtoList(result);

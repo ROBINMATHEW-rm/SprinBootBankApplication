@@ -19,6 +19,11 @@ public class AddressController {
         AddressDto result=addressService.addressAdd(addressDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
+    @PutMapping("/address/{id}")
+    public ResponseEntity<?> addressAdd(@PathVariable long id,@RequestBody AddressDto addressDto){
+        AddressDto result=addressService.addressUpdate(id, addressDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
+    }
     @GetMapping("/address/{id}")
     public ResponseEntity<?> getAddress(@PathVariable long id){
         AddressDto result=addressService.addressGetSingle(id);
