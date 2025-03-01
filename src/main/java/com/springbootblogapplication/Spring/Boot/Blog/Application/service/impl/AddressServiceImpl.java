@@ -1,8 +1,10 @@
 package com.springbootblogapplication.Spring.Boot.Blog.Application.service.impl;
 
+import com.springbootblogapplication.Spring.Boot.Blog.Application.constants.ApplicationConstants;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.dto.AddressDto;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.dto.AddressConversion;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.entity.Address;
+import com.springbootblogapplication.Spring.Boot.Blog.Application.exception.DataNotFoundException;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.repository.AddressRepo;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,12 +40,12 @@ public class AddressServiceImpl implements AddressService {
     }
     @Override
     public AddressDto addressGetSingle(long id){
-        Address result = addressRepo.findById(id).orElseThrow(() -> new RuntimeException());
+        Address result = addressRepo.findById(id).orElseThrow(() -> new DataNotFoundException(ApplicationConstants.No_Address_Data_Found_Message));
         return addressConversion.entityToDto(result);
     }
     @Override
     public AddressDto removeAddress(long id){
-        Address address = addressRepo.findById(id).orElseThrow(() -> new RuntimeException());
+        Address address = addressRepo.findById(id).orElseThrow(() -> new DataNotFoundException(ApplicationConstants.No_Address_Data_Found_Message));
         addressRepo.deleteById(id);
         return addressConversion.entityToDto(address);
     }
