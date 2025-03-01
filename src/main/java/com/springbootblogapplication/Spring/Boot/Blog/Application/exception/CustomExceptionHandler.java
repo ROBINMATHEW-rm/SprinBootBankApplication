@@ -8,6 +8,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class CustomExceptionHandler {
@@ -20,4 +21,16 @@ public class CustomExceptionHandler {
         ErrorDetails errorDetails =new ErrorDetails(timeStamp,detailedMessage, webRequest.getDescription(false));
         return new ResponseEntity<>(errorDetails,status);
     }
+    @ExceptionHandler(InvalidDataException.class)
+    public final ResponseEntity<ErrorDetails> handleInvalidException(InvalidDataException ex, WebRequest webRequest){
+        String timeStamp= LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME);
+        HttpStatus status =HttpStatus.UNPROCESSABLE_ENTITY;
+        String detailedMessage = ex.getErrors().stream()
+                .map(error -> String.format("\"%s\"",error))
+                .collect(Collectors.joining(",","[","]"));
+
+        ErrorDetails errorDetails =new ErrorDetails(timeStamp,detailedMessage, webRequest.getDescription(false));
+        return new ResponseEntity<>(errorDetails,status);
+    }
+
 }

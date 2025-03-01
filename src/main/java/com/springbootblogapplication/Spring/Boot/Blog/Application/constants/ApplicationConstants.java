@@ -1,5 +1,8 @@
 package com.springbootblogapplication.Spring.Boot.Blog.Application.constants;
 
 public class ApplicationConstants {
-    public static final String No_Address_Data_Found_Message = "No Address Data Found";
+    public static final String NO_DATA_FOUND_MESSAGE = "No Address Data Found";
+    public static final String NULL_VALUE_STREET_NAME = "Street Name Can Not Be Null or Empty";
+    public static final String NULL_VALUE_STATE_NAME = "State Name Can Not Be Null or Empty";
+    public static final String NULL_VALUE_ZIP_CODE= "ZipCode Can Not Be Null or Empty";
 }

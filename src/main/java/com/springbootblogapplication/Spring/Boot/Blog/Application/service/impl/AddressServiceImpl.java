@@ -18,18 +18,22 @@ public class AddressServiceImpl implements AddressService {
     private AddressRepo addressRepo;
     @Autowired
     private AddressConversion addressConversion;
+    @Autowired
+    private AddressServiceImplValidation addressServiceImplValidation;
     @Override
     public AddressDto addressAdd(AddressDto addressDto){
     Address address=addressConversion.dtoToEntity(addressDto);
+    addressServiceImplValidation.validateCreateAddressDetails(address);
     Address result = addressRepo.save(address);
     return addressConversion.entityToDto(result);
     }
     @Override
     public AddressDto addressUpdate(long id, AddressDto addressDto){
-        Address result = addressRepo.findById(id).orElseThrow(() -> new RuntimeException());
+        Address result = addressRepo.findById(id).orElseThrow(() -> new DataNotFoundException(ApplicationConstants.NO_DATA_FOUND_MESSAGE));
         result.setStreet(addressDto.getStreet());
         result.setState(addressDto.getState());
         result.setZipCode(addressDto.getZipCode());
+        addressServiceImplValidation.validateUpdateAddressDetails(result);
         Address updatedResult=addressRepo.save(result);
         return addressConversion.entityToDto(updatedResult);
     }
@@ -40,12 +44,12 @@ public class AddressServiceImpl implements AddressService {
     }
     @Override
     public AddressDto addressGetSingle(long id){
-        Address result = addressRepo.findById(id).orElseThrow(() -> new DataNotFoundException(ApplicationConstants.No_Address_Data_Found_Message));
+        Address result = addressRepo.findById(id).orElseThrow(() -> new DataNotFoundException(ApplicationConstants.NO_DATA_FOUND_MESSAGE));
         return addressConversion.entityToDto(result);
     }
     @Override
     public AddressDto removeAddress(long id){
-        Address address = addressRepo.findById(id).orElseThrow(() -> new DataNotFoundException(ApplicationConstants.No_Address_Data_Found_Message));
+        Address address = addressRepo.findById(id).orElseThrow(() -> new DataNotFoundException(ApplicationConstants.NO_DATA_FOUND_MESSAGE));
         addressRepo.deleteById(id);
         return addressConversion.entityToDto(address);
     }
