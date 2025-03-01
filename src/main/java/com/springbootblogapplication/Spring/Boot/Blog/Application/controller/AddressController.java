@@ -22,22 +22,22 @@ public class AddressController {
     @PutMapping("/address/{id}")
     public ResponseEntity<?> addressAdd(@PathVariable long id,@RequestBody AddressDto addressDto){
         AddressDto result=addressService.addressUpdate(id, addressDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(result);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
     @GetMapping("/address/{id}")
     public ResponseEntity<?> getAddress(@PathVariable long id){
         AddressDto result=addressService.addressGetSingle(id);
-        return ResponseEntity.status(HttpStatus.CREATED).body(result);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
     @GetMapping("/address")
     public ResponseEntity<?> getAllAddress(){
         List<AddressDto> result=addressService.addressGetAll();
-        return ResponseEntity.status(HttpStatus.CREATED).body(result);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
     @DeleteMapping("/address/{id}")
     public ResponseEntity<?> getRemoveAddress(@PathVariable long id){
         AddressDto result=addressService.removeAddress(id);
-        return ResponseEntity.status(HttpStatus.CREATED).body(result);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
 }
