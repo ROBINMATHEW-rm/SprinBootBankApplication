@@ -1,4 +1,5 @@
-package com.springbootblogapplication.Spring.Boot.Blog.Application.dto;
+package com.springbootblogapplication.Spring.Boot.Blog.Application.dto.conversion;
+import com.springbootblogapplication.Spring.Boot.Blog.Application.dto.AddressDto;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.entity.Address;
 import org.springframework.stereotype.Component;
 
