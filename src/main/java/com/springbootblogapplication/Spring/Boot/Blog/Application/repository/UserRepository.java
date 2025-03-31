@@ -4,6 +4,13 @@ import com.springbootblogapplication.Spring.Boot.Blog.Application.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
+    Optional<User> findByEmail(String email);
+    Optional<User> findByNameOrEmail(String name,String email);
+    Optional<User> findByName(String name);
+    Boolean existByName(String name);
+    Boolean existByEmail(String email);
 }

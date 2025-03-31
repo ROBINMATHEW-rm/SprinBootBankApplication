@@ -1,5 +1,6 @@
 package com.springbootblogapplication.Spring.Boot.Blog.Application.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,13 +16,16 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("user_id")
     private long id;
+    @JsonProperty("user_name")
     private String name;
+    @JsonProperty("user_email")
     private String email;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Address address;
-    @OneToMany(mappedBy = "user",cascade =CascadeType.ALL)
-    private List<Account> accounts;
-    @ManyToMany
+    @JsonProperty("password")
+    private String password;
+    @ManyToMany(fetch =FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinTable(name="user_roles",joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id"))
     private Set<Role> roleSet;
 }
