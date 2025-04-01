@@ -18,5 +18,5 @@ public class Role {
     @JsonProperty("role_id")
     private long id;
     @JsonProperty("role_name")
-    private String roleName;
+    private String name;
 }
