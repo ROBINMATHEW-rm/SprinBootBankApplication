@@ -18,6 +18,6 @@ public class Transaction {
     private String type;
     private double amount;
     private LocalDateTime dateTime;
-    @ManyToOne
-    private Account account;
+//    @ManyToOne
+//    private Account account;
 }

@@ -17,8 +17,8 @@ public class Account {
     private  long id;
     private String accountNumber;
     private double balance;
-    @ManyToOne
-    private User user;
-    @OneToMany(mappedBy = "account",cascade = CascadeType.ALL)
-    private List<Transaction> transactionList;
+//    @ManyToOne
+//    private User user;
+//    @OneToMany(mappedBy = "account",cascade = CascadeType.ALL)
+//    private List<Transaction> transactionList;
 }

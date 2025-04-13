@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -16,7 +16,6 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty("user_id")
     private long id;
     @JsonProperty("user_name")
     private String name;
@@ -24,8 +23,8 @@ public class User {
     private String email;
     @JsonProperty("password")
     private String password;
-    @ManyToMany(fetch =FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToMany(fetch =FetchType.EAGER,cascade = CascadeType.MERGE)
     @JoinTable(name="user_roles",joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id"))
-    private Set<Role> roleSet;
+    private Set<Role> roleSet = new HashSet<>();
 }

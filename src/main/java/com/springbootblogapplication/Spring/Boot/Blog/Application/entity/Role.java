@@ -15,8 +15,6 @@ import java.util.Set;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty("role_id")
     private long id;
-    @JsonProperty("role_name")
     private String name;
 }

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     @Autowired
     private UserService userService;
-    @PostMapping("/role")
+    @PostMapping("/user")
     public ResponseEntity<?> roleAdd(@RequestBody User user){
         User result=userService.userAdd(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
