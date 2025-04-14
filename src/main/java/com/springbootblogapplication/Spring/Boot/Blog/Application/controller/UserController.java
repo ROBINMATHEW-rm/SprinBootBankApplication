@@ -17,7 +17,7 @@ public class UserController {
     private UserService userService;
     @PostMapping("/user")
     public ResponseEntity<?> roleAdd(@RequestBody User user){
-        User result=userService.userAdd(user);
+        String result = userService.userAdd(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 }

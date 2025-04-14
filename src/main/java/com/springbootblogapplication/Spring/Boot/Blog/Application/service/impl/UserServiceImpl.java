@@ -10,7 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -22,13 +21,13 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Override
-    public User userAdd(User user){
+    public String userAdd(User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         Set<Role> roleSet = new HashSet<>();
         Role userRole = roleRepo.findByName("ROLE_USER").get();
         roleSet.add(userRole);
-        System.out.println(roleSet);
+        user.setRoleSet(roleSet);
         User result = userRepository.save(user);
-        return result;
+        return "User Created SuccessFully";
     }
 }
