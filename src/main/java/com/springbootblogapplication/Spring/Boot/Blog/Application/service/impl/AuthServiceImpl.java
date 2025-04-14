@@ -1,11 +1,16 @@
 package com.springbootblogapplication.Spring.Boot.Blog.Application.service.impl;
 
+import com.springbootblogapplication.Spring.Boot.Blog.Application.dto.LoginDto;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.entity.Role;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.entity.User;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.repository.RoleRepo;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.repository.UserRepository;
-import com.springbootblogapplication.Spring.Boot.Blog.Application.service.UserService;
+import com.springbootblogapplication.Spring.Boot.Blog.Application.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +18,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class AuthServiceImpl implements AuthService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private RoleRepo roleRepo;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    private AuthenticationManager authenticationManager;
+
+    public AuthServiceImpl(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
+    }
+
     @Override
     public String userAdd(User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -29,5 +41,12 @@ public class UserServiceImpl implements UserService {
         user.setRoleSet(roleSet);
         User result = userRepository.save(user);
         return "User Created SuccessFully";
+    }
+    @Override
+    public String login(LoginDto loginDto){
+     Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+             loginDto.getEmail(),loginDto.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        return "User Logged in SuccessFully";
     }
 }
