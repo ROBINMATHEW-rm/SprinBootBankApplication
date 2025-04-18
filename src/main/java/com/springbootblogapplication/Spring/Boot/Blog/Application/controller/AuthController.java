@@ -17,13 +17,8 @@ public class AuthController {
     @Autowired
     private AuthService authService;
     @PostMapping("/user")
-    public ResponseEntity<?> registerUser(@RequestBody User user){
+    public ResponseEntity<?> registerUser(@RequestBody User user) {
         String result = authService.userAdd(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(result);
-    }
-    @PostMapping(value = "/login")
-    public ResponseEntity<?> loginUser(@RequestBody LoginDto loginDto){
-        String result = authService.login(loginDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 }

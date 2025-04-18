@@ -26,12 +26,6 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    private AuthenticationManager authenticationManager;
-
-    public AuthServiceImpl(AuthenticationManager authenticationManager) {
-        this.authenticationManager = authenticationManager;
-    }
-
     @Override
     public String userAdd(User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -41,12 +35,5 @@ public class AuthServiceImpl implements AuthService {
         user.setRoleSet(roleSet);
         User result = userRepository.save(user);
         return "User Created SuccessFully";
-    }
-    @Override
-    public String login(LoginDto loginDto){
-     Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-             loginDto.getEmail(),loginDto.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        return "User Logged in SuccessFully";
     }
 }
