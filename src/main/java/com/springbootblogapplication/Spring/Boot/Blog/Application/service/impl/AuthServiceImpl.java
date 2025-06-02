@@ -23,12 +23,10 @@ public class AuthServiceImpl implements AuthService {
     private UserRepository userRepository;
     @Autowired
     private RoleRepo roleRepo;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Override
     public String userAdd(User user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(user.getPassword());
         Set<Role> roleSet = new HashSet<>();
         Role userRole = roleRepo.findByName("ROLE_USER").get();
         roleSet.add(userRole);
