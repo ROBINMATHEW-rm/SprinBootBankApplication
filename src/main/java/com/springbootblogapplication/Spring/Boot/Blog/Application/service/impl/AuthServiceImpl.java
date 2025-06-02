@@ -1,17 +1,11 @@
 package com.springbootblogapplication.Spring.Boot.Blog.Application.service.impl;
 
-import com.springbootblogapplication.Spring.Boot.Blog.Application.dto.LoginDto;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.entity.Role;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.entity.User;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.repository.RoleRepo;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.repository.UserRepository;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;

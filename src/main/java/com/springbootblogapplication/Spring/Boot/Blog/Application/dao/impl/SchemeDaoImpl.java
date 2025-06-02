@@ -20,7 +20,6 @@ public class SchemeDaoImpl implements SchemeDao {
         jdbcTemplate.update(con -> {
             PreparedStatement preparedStatement=con.prepareStatement(SchemeQuery.INSERT_SCHEME_DATA);
             int paraIndex =1;
-            preparedStatement.setInt(paraIndex++,schemeData.getSchemaId());
             preparedStatement.setString(paraIndex++,schemeData.getSchemeName());
             preparedStatement.setString(paraIndex++,schemeData.getDescription());
             return preparedStatement;
