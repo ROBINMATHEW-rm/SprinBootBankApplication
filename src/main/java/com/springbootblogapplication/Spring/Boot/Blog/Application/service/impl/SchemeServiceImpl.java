@@ -6,6 +6,8 @@ import com.springbootblogapplication.Spring.Boot.Blog.Application.dto.SchemeData
 import com.springbootblogapplication.Spring.Boot.Blog.Application.service.SchemeService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SchemeServiceImpl implements SchemeService {
     private final SchemeDao schemeDao;
@@ -18,6 +20,10 @@ public class SchemeServiceImpl implements SchemeService {
     @Override
     public void createSchemeData(SchemeData schemeData){
         schemeDao.createSchemeData(schemeAssembler.assembleCreateSchemeData(schemeData));
+    }
+    @Override
+    public List<SchemeData> getAllSchemeData(){
+        return schemeDao.getAllSchemeData();
     }
 }
 

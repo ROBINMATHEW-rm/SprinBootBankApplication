@@ -2,6 +2,10 @@ package com.springbootblogapplication.Spring.Boot.Blog.Application.dao;
 
 import com.springbootblogapplication.Spring.Boot.Blog.Application.dto.SchemeData;
 
+import java.util.List;
+
 public interface SchemeDao {
     void createSchemeData(SchemeData schemeData);
+
+    List<SchemeData> getAllSchemeData();
 }
