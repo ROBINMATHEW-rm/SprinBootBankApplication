@@ -1,8 +1,10 @@
 package com.springbootblogapplication.Spring.Boot.Blog.Application.dao.impl;
 
+import com.springbootblogapplication.Spring.Boot.Blog.Application.constants.ApplicationConstants;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.dao.SchemeDao;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.dto.SchemeData;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.dto.mapper.SchemeRowMapper;
+import com.springbootblogapplication.Spring.Boot.Blog.Application.exception.DataNotFoundException;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.query.SchemeQuery;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -35,8 +37,17 @@ public class SchemeDaoImpl implements SchemeDao {
     }
     @Override
     public SchemeData getSchemeData(String schemeName){
-        String sql=SchemeQuery.GET_SCHEME_DATA;
-        List<SchemeData> res = jdbcTemplate.query(sql,new SchemeRowMapper(),schemeName);
-        return res.get(0);
+        int numRows = getNumRowsSchemeName(schemeName);
+        if(numRows == 0) {
+          throw new DataNotFoundException(ApplicationConstants.NO_SCHEME_DATA_FOUND_MESSAGE);
+        }else {
+            String sql = SchemeQuery.GET_SCHEME_DATA;
+            List<SchemeData> res = jdbcTemplate.query(sql, new SchemeRowMapper(), schemeName);
+            return res.get(0);
+        }
+    }
+    public int getNumRowsSchemeName(String schemeName){
+        String sql = SchemeQuery.GET_SCHEME_ROW_DATA;
+        return jdbcTemplate.queryForObject(sql,new Object[]{schemeName},Integer.class);
     }
 }
