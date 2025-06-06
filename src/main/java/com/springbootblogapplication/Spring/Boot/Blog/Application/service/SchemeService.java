@@ -8,4 +8,6 @@ public interface SchemeService {
     void createSchemeData(SchemeData schemeData);
 
     List<SchemeData> getAllSchemeData();
+
+    SchemeData getSchemeData(String schemeName);
 }

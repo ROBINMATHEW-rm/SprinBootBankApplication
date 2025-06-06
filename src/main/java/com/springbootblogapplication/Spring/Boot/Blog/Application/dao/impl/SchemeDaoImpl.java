@@ -33,4 +33,10 @@ public class SchemeDaoImpl implements SchemeDao {
         List<SchemeData> res = jdbcTemplate.query(sql,new SchemeRowMapper());
         return res.isEmpty() ? null : res;
     }
+    @Override
+    public SchemeData getSchemeData(String schemeName){
+        String sql=SchemeQuery.GET_SCHEME_DATA;
+        List<SchemeData> res = jdbcTemplate.query(sql,new SchemeRowMapper(),schemeName);
+        return res.get(0);
+    }
 }

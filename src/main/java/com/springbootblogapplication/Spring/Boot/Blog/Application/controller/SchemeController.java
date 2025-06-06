@@ -27,5 +27,9 @@ public class SchemeController {
         List<SchemeData> response = schemeService.getAllSchemeData();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-
+    @GetMapping("/schema-data/{schemeName}")
+    public ResponseEntity<?> getScheme(@PathVariable String schemeName) {
+        SchemeData response = schemeService.getSchemeData(schemeName);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 }
