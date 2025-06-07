@@ -21,8 +21,8 @@ public class SecurityConfiguration {
         httpSecurity.
                 csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/v1/*").permitAll()
-                .anyRequest().authenticated());
+                .anyRequest().permitAll()
+                );
         return httpSecurity.build();
     }
 
