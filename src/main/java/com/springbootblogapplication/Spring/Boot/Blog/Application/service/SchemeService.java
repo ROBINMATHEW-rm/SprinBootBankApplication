@@ -11,5 +11,5 @@ public interface SchemeService {
 
     SchemeData getSchemeData(String schemeName);
 
-    SchemeData deleteSchemeData(String schemeName);
+    String deleteSchemeData(String schemeName);
 }

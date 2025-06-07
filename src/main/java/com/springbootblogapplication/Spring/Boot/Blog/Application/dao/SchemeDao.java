@@ -11,5 +11,5 @@ public interface SchemeDao {
 
     SchemeData getSchemeData(String schemeName);
 
-    SchemeData deleteSchemeData(String schemeName);
+    String deleteSchemeData(String schemeName);
 }
