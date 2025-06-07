@@ -7,10 +7,13 @@ import com.springbootblogapplication.Spring.Boot.Blog.Application.dto.mapper.Sch
 import com.springbootblogapplication.Spring.Boot.Blog.Application.exception.DataNotFoundException;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.query.SchemeQuery;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class SchemeDaoImpl implements SchemeDao {
@@ -20,14 +23,20 @@ public class SchemeDaoImpl implements SchemeDao {
         this.jdbcTemplate = jdbcTemplate;
     }
     @Override
-    public void createSchemeData(SchemeData schemeData){
-        jdbcTemplate.update(con -> {
-            PreparedStatement preparedStatement=con.prepareStatement(SchemeQuery.INSERT_SCHEME_DATA);
-            int paraIndex =1;
-            preparedStatement.setString(paraIndex++,schemeData.getSchemeName());
-            preparedStatement.setString(paraIndex++,schemeData.getDescription());
-            return preparedStatement;
-        });
+    public SchemeData createSchemeData(SchemeData schemeData){
+        int numRows = getNumRowsSchemeName(schemeData.getSchemeName());
+        if(numRows == 0) {
+            jdbcTemplate.update(con -> {
+                PreparedStatement preparedStatement = con.prepareStatement(SchemeQuery.INSERT_SCHEME_DATA);
+                int paraIndex = 1;
+                preparedStatement.setString(paraIndex++, schemeData.getSchemeName());
+                preparedStatement.setString(paraIndex++, schemeData.getDescription());
+                return preparedStatement;
+            });
+        }else {
+            throw new DataNotFoundException(ApplicationConstants.ALREADY_EXIST);
+        }
+        return schemeData;
     }
     @Override
     public List<SchemeData> getAllSchemeData(){

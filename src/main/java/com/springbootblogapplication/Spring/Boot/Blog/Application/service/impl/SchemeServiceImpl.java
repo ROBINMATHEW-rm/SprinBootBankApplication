@@ -18,8 +18,8 @@ public class SchemeServiceImpl implements SchemeService {
         this.schemeAssembler = schemeAssembler;
     }
     @Override
-    public void createSchemeData(SchemeData schemeData){
-        schemeDao.createSchemeData(schemeAssembler.assembleCreateSchemeData(schemeData));
+    public SchemeData createSchemeData(SchemeData schemeData){
+        return schemeDao.createSchemeData(schemeAssembler.assembleCreateSchemeData(schemeData));
     }
     @Override
     public List<SchemeData> getAllSchemeData(){

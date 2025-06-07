@@ -19,8 +19,8 @@ public class SchemeController {
 
     @PostMapping("/schema-data")
     public ResponseEntity<?> createScheme(@RequestBody SchemeData schemeData) {
-        schemeService.createSchemeData(schemeData);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Created Successfully");
+        SchemeData res = schemeService.createSchemeData(schemeData);
+        return ResponseEntity.status(HttpStatus.CREATED).body(res);
     }
     @GetMapping("/schema-data")
     public ResponseEntity<?> getAllScheme(@RequestBody SchemeData schemeData) {
