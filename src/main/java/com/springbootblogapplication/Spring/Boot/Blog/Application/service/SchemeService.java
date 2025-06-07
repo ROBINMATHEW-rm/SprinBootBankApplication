@@ -10,4 +10,6 @@ public interface SchemeService {
     List<SchemeData> getAllSchemeData();
 
     SchemeData getSchemeData(String schemeName);
+
+    SchemeData deleteSchemeData(String schemeName);
 }

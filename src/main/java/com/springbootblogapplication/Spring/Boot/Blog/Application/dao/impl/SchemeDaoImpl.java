@@ -46,6 +46,18 @@ public class SchemeDaoImpl implements SchemeDao {
             return res.get(0);
         }
     }
+    @Override
+    public SchemeData deleteSchemeData(String schemeName){
+        int numRows = getNumRowsSchemeName(schemeName);
+        if(numRows == 0) {
+            throw new DataNotFoundException(ApplicationConstants.NO_SCHEME_DATA_FOUND_MESSAGE);
+        }else {
+            String sql = SchemeQuery.DELETE_SCHEME_DATA;
+            List<SchemeData> res = jdbcTemplate.query(sql, new SchemeRowMapper(), schemeName);
+            return res.get(0);
+        }
+    }
+
     public int getNumRowsSchemeName(String schemeName){
         String sql = SchemeQuery.GET_SCHEME_ROW_DATA;
         return jdbcTemplate.queryForObject(sql,new Object[]{schemeName},Integer.class);

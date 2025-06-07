@@ -5,4 +5,5 @@ public class SchemeQuery {
     public static final String GET_ALL_SCHEME_DATA = "select * from SCHEME";
     public static final String GET_SCHEME_DATA = "select * from SCHEME where NAME=?";
     public static final String GET_SCHEME_ROW_DATA = "select COUNT(*) as numRows from SCHEME where NAME=?";
+    public static final String DELETE_SCHEME_DATA = "delete from SCHEME where NAME=?";
 }

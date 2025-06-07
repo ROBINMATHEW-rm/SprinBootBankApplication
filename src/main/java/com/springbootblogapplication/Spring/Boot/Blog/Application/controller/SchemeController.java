@@ -32,4 +32,9 @@ public class SchemeController {
         SchemeData response = schemeService.getSchemeData(schemeName);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+    @DeleteMapping("/schema-data/{schemeName}")
+    public ResponseEntity<?> deleteScheme(@PathVariable String schemeName) {
+        SchemeData response = schemeService.deleteSchemeData(schemeName);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 }

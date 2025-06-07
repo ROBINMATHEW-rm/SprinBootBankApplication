@@ -29,5 +29,9 @@ public class SchemeServiceImpl implements SchemeService {
     public SchemeData getSchemeData(String schemeName){
         return schemeDao.getSchemeData(schemeName);
     }
+    @Override
+    public SchemeData deleteSchemeData(String schemeName){
+        return schemeDao.deleteSchemeData(schemeName);
+    }
 }
 
