@@ -1,11 +1,14 @@
 package com.springbootblogapplication.Spring.Boot.Blog.Application.service.impl;
 
+import com.springbootblogapplication.Spring.Boot.Blog.Application.dto.LoginDto;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.entity.Role;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.entity.User;
+import com.springbootblogapplication.Spring.Boot.Blog.Application.exception.DataNotFoundException;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.repository.RoleRepo;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.repository.UserRepository;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +32,11 @@ public class AuthServiceImpl implements AuthService {
         user.setRoleSet(roleSet);
         User result = userRepository.save(user);
         return "User Created SuccessFully";
+    }
+    @Override
+    public User loadUserByNameAndEmail(String email, String password){
+        User user = userRepository.findByNameOrEmail(email,password)
+                .orElseThrow(()->new DataNotFoundException("User Not Found"));
+        return user;
     }
 }
