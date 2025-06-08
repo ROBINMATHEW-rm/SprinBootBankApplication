@@ -6,6 +6,7 @@ import com.springbootblogapplication.Spring.Boot.Blog.Application.repository.Rol
 import com.springbootblogapplication.Spring.Boot.Blog.Application.repository.UserRepository;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -17,10 +18,11 @@ public class AuthServiceImpl implements AuthService {
     private UserRepository userRepository;
     @Autowired
     private RoleRepo roleRepo;
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Override
     public String userAdd(User user){
-        user.setPassword(user.getPassword());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         Set<Role> roleSet = new HashSet<>();
         Role userRole = roleRepo.findByName("ROLE_USER").get();
         roleSet.add(userRole);
