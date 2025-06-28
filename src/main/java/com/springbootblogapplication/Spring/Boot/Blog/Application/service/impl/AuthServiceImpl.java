@@ -24,14 +24,14 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Override
-    public String userAdd(User user){
+    public User userAdd(User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         Set<Role> roleSet = new HashSet<>();
         Role userRole = roleRepo.findByName("ROLE_USER").get();
         roleSet.add(userRole);
         user.setRoleSet(roleSet);
         User result = userRepository.save(user);
-        return "User Created SuccessFully";
+        return user;
     }
     @Override
     public User loadUserByNameAndEmail(String email, String password){
