@@ -29,7 +29,7 @@ public class LoginController {
         this.authService = authService;
     }
 
-    @PostMapping("/login")
+    @PostMapping("api/login")
     public ResponseEntity<?> login(@RequestBody LoginDto loginDto){
         authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(loginDto.getEmail(),loginDto.getPassword())

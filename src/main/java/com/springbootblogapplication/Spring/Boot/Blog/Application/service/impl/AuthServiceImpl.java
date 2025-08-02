@@ -16,7 +16,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-public class AuthServiceImpl implements AuthService {
+public class AuthServiceImpl  implements AuthService{
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -31,12 +31,6 @@ public class AuthServiceImpl implements AuthService {
         roleSet.add(userRole);
         user.setRoleSet(roleSet);
         User result = userRepository.save(user);
-        return user;
-    }
-    @Override
-    public User loadUserByNameAndEmail(String email, String password){
-        User user = userRepository.findByNameOrEmail(email,password)
-                .orElseThrow(()->new DataNotFoundException("User Not Found"));
         return user;
     }
 }
