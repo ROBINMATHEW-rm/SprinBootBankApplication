@@ -1,4 +1,6 @@
 package com.springbootblogapplication.Spring.Boot.Blog.Application.controller;
+import com.springbootblogapplication.Spring.Boot.Blog.Application.dto.BibleBookDto;
+import com.springbootblogapplication.Spring.Boot.Blog.Application.dto.conversion.BibleBookConversion;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.entity.BibleBook;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.service.BibleBookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +14,12 @@ import java.util.List;
 public class BibleBookController {
     @Autowired
     private BibleBookService bibleBookService;
+    @Autowired
+    private BibleBookConversion bibleBookConversion;
     @GetMapping
-    public List<BibleBook> getAllBooks() {
-        return bibleBookService.getAllBooks();
+    public List<BibleBookDto> getAllBooks() {
+        List<BibleBook> bibleBooks = bibleBookService.getAllBooks();
+        return bibleBookConversion.toDtoList(bibleBooks);
     }
 }
 
