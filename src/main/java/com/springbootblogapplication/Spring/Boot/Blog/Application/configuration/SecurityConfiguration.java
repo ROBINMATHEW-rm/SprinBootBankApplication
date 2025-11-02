@@ -29,6 +29,8 @@ public class SecurityConfiguration {
                                 "/swagger-ui/**",
                                 "/swagger-ui.html"
                         ).permitAll()
+                     // ✅ Allow Login API publicly
+                    .requestMatchers("/user").permitAll()
                         // ✅ Secure all other endpoints
                         .anyRequest().authenticated()
                 )
