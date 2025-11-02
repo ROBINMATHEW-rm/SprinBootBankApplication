@@ -9,5 +9,7 @@ public class ApplicationConstants {
     public static final String NO_SCHEME_DATA_FOUND_MESSAGE = "No Scheme Data Found";
     public static final String DATA_DELETE_FAILED = "Failed To Delete Data";
     public static final String DATA_DELETE_SUCCESS = "Deleted Data Successfully";
-    public static final String ALREADY_EXIST= "Scheme Name Is Already Exist";
+    public static final String ALREADY_EXIST = "Scheme Name Is Already Exist";
+    public static final String SCHEME_NAME = "Scheme Name Can Not Be Null or Empty";
+    public static final String SCHEME_DESC = "Scheme Description Can Not Be Null or Empty";
 }

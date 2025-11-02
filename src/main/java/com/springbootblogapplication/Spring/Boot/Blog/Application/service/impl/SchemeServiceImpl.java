@@ -12,13 +12,16 @@ import java.util.List;
 public class SchemeServiceImpl implements SchemeService {
     private final SchemeDao schemeDao;
     private final SchemeAssembler schemeAssembler;
+    private final SchemeServiceImplValidation schemeServiceImplValidation;
 
-    public SchemeServiceImpl(SchemeDao schemeDao, SchemeAssembler schemeAssembler) {
+    public SchemeServiceImpl(SchemeDao schemeDao, SchemeAssembler schemeAssembler, SchemeServiceImplValidation schemeServiceImplValidation) {
         this.schemeDao = schemeDao;
         this.schemeAssembler = schemeAssembler;
+        this.schemeServiceImplValidation = schemeServiceImplValidation;
     }
     @Override
     public SchemeData createSchemeData(SchemeData schemeData){
+        schemeServiceImplValidation.validateCreateSchemeDetails(schemeData);
         return schemeDao.createSchemeData(schemeAssembler.assembleCreateSchemeData(schemeData));
     }
     @Override
