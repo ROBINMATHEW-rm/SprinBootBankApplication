@@ -3,10 +3,11 @@ import com.springbootblogapplication.Spring.Boot.Blog.Application.dto.AddressDto
 import com.springbootblogapplication.Spring.Boot.Blog.Application.dto.BibleBookDto;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.entity.Address;
 import com.springbootblogapplication.Spring.Boot.Blog.Application.entity.BibleBook;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Component
 public class BibleBookConversion {
     public BibleBookDto entityToDto(BibleBook bibleBook){
         BibleBookDto bibleBookDto = new BibleBookDto();
